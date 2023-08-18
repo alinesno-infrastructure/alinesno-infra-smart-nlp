@@ -1,0 +1,10 @@
+server:
+  port: 30301
+
+# spring 配置
+spring:
+  application:
+    name: alinesno-infra-smart-nlp-boot
+  devtools:
+    restart:
+      enabled: true
