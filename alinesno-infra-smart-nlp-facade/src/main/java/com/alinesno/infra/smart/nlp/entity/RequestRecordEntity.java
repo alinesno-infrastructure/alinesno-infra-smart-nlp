@@ -19,8 +19,8 @@ import lombok.Data;
  * @version 1.0.0
  */
 @Data
-@TableName("model_management")
-public class ModelManagementEntity extends InfraBaseEntity {
+@TableName("request_record")
+public class RequestRecordEntity extends InfraBaseEntity {
 	/**
 	 * 应用ID
 	 */
@@ -30,45 +30,28 @@ public class ModelManagementEntity extends InfraBaseEntity {
 	private Long appId;
 
 	/**
-	 * 模型名称
+	 * 请求时间
 	 */
-	@ColumnType(length = 100)
-	@ColumnComment("模型名称")
-	@TableField("model_name")
-	private String modelName;
+	@ColumnType(value = MySqlTypeConstant.DATETIME, length = 18)
+	@ColumnComment("请求时间")
+	@TableField("request_time")
+	private Date requestTime;
 
 	/**
-	 * 模型描述
+	 * 请求内容
 	 */
-	@ColumnType(length = 200)
-	@ColumnComment("模型描述")
-	@TableField("model_description")
-	private String modelDescription;
+	@ColumnType(MySqlTypeConstant.TEXT)
+	@ColumnComment("请求内容")
+	@TableField("request_content")
+	private String requestContent;
 
 	/**
-	 * 存储模型文件的路径或URL
+	 * 响应内容
 	 */
-	@TableField("model_path")
-	@ColumnType(length=255)
-	@ColumnComment("存储模型文件的路径或URL")
-	private String modelPath;
-
-	/**
-	 * 模型的版本号或标识
-	 */
-	@TableField("model_version")
-	@ColumnType(length=20)
-	@ColumnComment("模型的版本号或标识")
-	private String modelVersion;
-
-
-	/**
-	 * 模型状态
-	 */
-	@ColumnType(length = 20)
-	@ColumnComment("模型状态")
-	@TableField("model_status")
-	private String modelStatus;
+	@ColumnType(MySqlTypeConstant.TEXT)
+	@ColumnComment("响应内容")
+	@TableField("response_content")
+	private String responseContent;
 
 	/**
 	 * 创建时间

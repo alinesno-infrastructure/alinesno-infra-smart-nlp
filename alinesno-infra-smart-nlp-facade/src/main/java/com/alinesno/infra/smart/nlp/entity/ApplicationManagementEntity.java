@@ -19,56 +19,23 @@ import lombok.Data;
  * @version 1.0.0
  */
 @Data
-@TableName("model_management")
-public class ModelManagementEntity extends InfraBaseEntity {
+@TableName("application_management")
+public class ApplicationManagementEntity extends InfraBaseEntity {
 	/**
-	 * 应用ID
-	 */
-	@ColumnType(MySqlTypeConstant.BIGINT)
-	@ColumnComment("应用ID")
-	@TableField("app_id")
-	private Long appId;
-
-	/**
-	 * 模型名称
+	 * 应用名称
 	 */
 	@ColumnType(length = 100)
-	@ColumnComment("模型名称")
-	@TableField("model_name")
-	private String modelName;
+	@ColumnComment("应用名称")
+	@TableField("app_name")
+	private String appName;
 
 	/**
-	 * 模型描述
+	 * 应用描述
 	 */
 	@ColumnType(length = 200)
-	@ColumnComment("模型描述")
-	@TableField("model_description")
-	private String modelDescription;
-
-	/**
-	 * 存储模型文件的路径或URL
-	 */
-	@TableField("model_path")
-	@ColumnType(length=255)
-	@ColumnComment("存储模型文件的路径或URL")
-	private String modelPath;
-
-	/**
-	 * 模型的版本号或标识
-	 */
-	@TableField("model_version")
-	@ColumnType(length=20)
-	@ColumnComment("模型的版本号或标识")
-	private String modelVersion;
-
-
-	/**
-	 * 模型状态
-	 */
-	@ColumnType(length = 20)
-	@ColumnComment("模型状态")
-	@TableField("model_status")
-	private String modelStatus;
+	@ColumnComment("应用描述")
+	@TableField("app_description")
+	private String appDescription;
 
 	/**
 	 * 创建时间
