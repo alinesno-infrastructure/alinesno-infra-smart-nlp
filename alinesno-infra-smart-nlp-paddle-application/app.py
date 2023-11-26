@@ -12,7 +12,6 @@ from paddlenlp.transformers import AutoTokenizer, AutoModelForCausalLM
 from datetime import timedelta
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
-from paddleocr import PaddleOCR, draw_ocr
 from werkzeug import run_simple
 from paddlenlp import Taskflow
 
