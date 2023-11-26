@@ -26,7 +26,7 @@ def detect():
     text = request.form['text']
     print('text = ' + text)
 
-    result = senta(text)
+    result = senta('今天的评论情况不错')
 
     return jsonify({
         'status': 'success',
