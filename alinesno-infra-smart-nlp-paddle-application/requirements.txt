@@ -1,7 +1,7 @@
 fastapi==0.101.0
 paddlenlp==2.6.1
 paddlepaddle==2.5.1
-python-multipart==0.0.6
+python-multipart==0.0.7
 uvicorn==0.23.2
 requests==2.31.0
 numpy==1.23.5
