@@ -25,12 +25,12 @@
         <module>alinesno-infra-smart-nlp-facade</module>  <!-- 接口和引用 -->
         <module>alinesno-infra-smart-nlp-domain</module>  <!-- 领域服务 -->
         <module>alinesno-infra-smart-nlp-adapter</module> <!-- 适配层 -->
-        <module>alinesno-infra-smart-nlp-api</module>  <!-- 接口服务 -->
+        <module>alinesno-infra-smart-nlp-gateway</module>  <!-- 接口服务 -->
         <module>alinesno-infra-smart-nlp-client</module>  <!-- 对外引用 -->
         <module>alinesno-infra-smart-nlp-boot</module>  <!-- 启动服务 -->
 
         <!-- 前端服务
-        <module>alinesno-infra-smart-nlp-admin</module>
+        <module>alinesno-infra-smart-nlp-ui</module>
         -->
     </modules>
 

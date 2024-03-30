@@ -10,7 +10,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>alinesno-infra-smart-nlp-api</artifactId>
+	<artifactId>alinesno-infra-smart-nlp-gateway</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
