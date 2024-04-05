@@ -89,6 +89,34 @@ export const constantRoutes = [
         name: '/dashboard/learnPanel',
         meta: { title: '学习手册', icon: 'dashboard', affix: true }
       },
+
+      // >>>>>>>>>>>>>> smart_router_start >>>>>>>>>>>>>>>>>>>>>
+      {
+        path: '/base/smart/application/index',
+        component: () => import('@/views/base/smart/application/index'),
+        name: '/base/smart/application/index',
+        meta: { title: '应用管理', icon: 'dashboard', affix: true }
+      }, 
+      {
+        path: '/base/smart/model/index',
+        component: () => import('@/views/base/smart/model/index'),
+        name: '/base/smart/model/index',
+        meta: { title: '模型管理', icon: 'dashboard', affix: true }
+      }, 
+      {
+        path: '/base/smart/config/index',
+        component: () => import('@/views/base/smart/config/index'),
+        name: '/base/smart/config/index',
+        meta: { title: '认证配置', icon: 'dashboard', affix: true }
+      }, 
+      {
+        path: '/base/smart/apiRecord/index',
+        component: () => import('@/views/base/smart/apiRecord/index'),
+        name: '/base/smart/apiRecord/index',
+        meta: { title: '日志记录', icon: 'dashboard', affix: true }
+      }
+      // >>>>>>>>>>>>>> smart_router_end   >>>>>>>>>>>>>>>>>>>>>
+      
     ]
   },
   {
