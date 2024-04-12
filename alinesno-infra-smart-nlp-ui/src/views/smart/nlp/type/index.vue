@@ -4,11 +4,11 @@
          <!--应用数据-->
          <el-col :span="24" :xs="24">
             <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="100px">
-               <el-form-item label="应用名称" prop="dbName">
-                  <el-input v-model="queryParams.dbName" placeholder="请输入应用名称" clearable style="width: 240px" @keyup.enter="handleQuery" />
+               <el-form-item label="应用名称" prop="typeName">
+                  <el-input v-model="queryParams.typeName" placeholder="请输入应用名称" clearable style="width: 240px" @keyup.enter="handleQuery" />
                </el-form-item>
-               <el-form-item label="应用名称" prop="dbName">
-                  <el-input v-model="queryParams['condition[dbName|like]']" placeholder="请输入应用名称" clearable style="width: 240px" @keyup.enter="handleQuery" />
+               <el-form-item label="应用名称" prop="typeName">
+                  <el-input v-model="queryParams['condition[typeName|like]']" placeholder="请输入应用名称" clearable style="width: 240px" @keyup.enter="handleQuery" />
                </el-form-item>
                <el-form-item>
                   <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -18,48 +18,64 @@
 
             <el-row :gutter="10" class="mb8">
 
-               <el-col :span="1.5">
+               <!-- <el-col :span="1.5">
                   <el-button type="primary" plain icon="Plus" @click="handleAdd">新增</el-button>
-               </el-col>
+               </el-col> -->
+
                <el-col :span="1.5">
                   <el-button type="success" plain icon="Edit" :disabled="single" @click="handleUpdate">修改</el-button>
                </el-col>
-               <el-col :span="1.5">
+
+               <!-- <el-col :span="1.5">
                   <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
-               </el-col>
+               </el-col> -->
 
                <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
             </el-row>
 
-            <el-table v-loading="loading" :data="ApplicationList" @selection-change="handleSelectionChange">
-               <el-table-column type="selection" width="50" align="center" />
-               <el-table-column label="图标" align="center" with="80" key="status" v-if="columns[5].visible">
+            <el-table v-loading="loading" :data="TypeList" @selection-change="handleSelectionChange">
+               <el-table-column type="index" width="50" align="center" />
+               <el-table-column label="图标" align="center" width="70" key="icon" v-if="columns[5].visible">
+                  <template #default="scope">
+                     <span style="font-size:25px;color:#3b5998">
+                        <i :class="scope.row.icon" />
+                     </span>
+                  </template>
                </el-table-column>
 
                <!-- 业务字段-->
-               <el-table-column label="应用名称" align="center" key="dbName" prop="dbName" v-if="columns[0].visible" />
-               <el-table-column label="应用描述" align="center" key="dbDesc" prop="dbDesc" v-if="columns[1].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="表数据量" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="类型" align="center" key="dbType" prop="dbType" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="应用地址" align="center" key="jdbcUrl" prop="jdbcUrl" v-if="columns[4].visible" width="120" />
-               <el-table-column label="状态" align="center" key="hasStatus" v-if="columns[5].visible" />
-
-               <el-table-column label="添加时间" align="center" prop="addTime" v-if="columns[6].visible" width="160">
+               <el-table-column label="类型名称" align="center" width="150" key="typeName" prop="typeName" v-if="columns[0].visible" />
+               <el-table-column label="类型描述" align="left" key="typeDesc" prop="typeDesc" v-if="columns[0].visible" />
+               <el-table-column label="是否开启" align="center" width="200" key="isOpen" prop="isOpen" v-if="columns[1].visible" :show-overflow-tooltip="true" >
                   <template #default="scope">
-                     <span>{{ parseTime(scope.row.addTime) }}</span>
+                     <el-switch
+                        v-model="scope.row.isOpen"
+                        active-value="0"
+                        inactive-value="1"
+                     />
+                  </template>
+               </el-table-column>
+               <el-table-column label="请求次数" align="center" width="300" key="requestCount" prop="requestCount" v-if="columns[2].visible" :show-overflow-tooltip="true">
+                  <template #default="scope">
+                     <i class="fa-solid fa-link"></i> 100次/每分钟
+                  </template>
+               </el-table-column>
+
+               <el-table-column label="限流" align="center" width="100" key="isRateLimited" prop="isRateLimited" v-if="columns[3].visible" :show-overflow-tooltip="true" >
+                  <template #default="scope">
+                     <el-switch
+                        v-model="scope.row.isRateLimited"
+                        active-value="false"
+                        inactive-value="true"
+                     />
                   </template>
                </el-table-column>
 
                <!-- 操作字段  -->
-               <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+               <el-table-column label="操作" align="center" width="100" class-name="small-padding fixed-width">
                   <template #default="scope">
-                     <el-tooltip content="修改" placement="top" v-if="scope.row.ApplicationId !== 1">
-                        <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
-                           v-hasPermi="['system:Application:edit']"></el-button>
-                     </el-tooltip>
-                     <el-tooltip content="删除" placement="top" v-if="scope.row.ApplicationId !== 1">
-                        <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-                           v-hasPermi="['system:Application:remove']"></el-button>
+                     <el-tooltip content="配置" placement="top" v-if="scope.row.id !== 1">
+                        <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:Type:edit']"></el-button>
                      </el-tooltip>
                   </template>
 
@@ -74,40 +90,27 @@
          <el-form :model="form" :rules="rules" ref="databaseRef" label-width="100px">
             <el-row>
                <el-col :span="24">
-                  <el-form-item label="名称" prop="dbName">
-                     <el-input v-model="form.dbName" placeholder="请输入应用名称" maxlength="50" />
+                  <el-form-item label="类型名称" prop="typeName">
+                     <el-input v-model="form.typeName" placeholder="请输入应用名称" maxlength="50" />
                   </el-form-item>
                </el-col>
             </el-row>
             <el-row>
                <el-col :span="24">
-                  <el-form-item label="连接" prop="jdbcUrl">
-                     <el-input v-model="form.jdbcUrl" placeholder="请输入jdbcUrl连接地址" maxlength="128" />
-                  </el-form-item>
-               </el-col>
-               <el-col :span="24">
-                  <el-form-item label="类型" prop="dbType">
-                     <el-input v-model="form.dbType" placeholder="请输入类型" maxlength="50" />
+                  <el-form-item label="类型描述" prop="typeDesc">
+                     <el-input v-model="form.typeDesc" placeholder="请输入类型描述" maxlength="256" />
                   </el-form-item>
                </el-col>
             </el-row>
             <el-row>
                <el-col :span="24">
-                  <el-form-item label="用户名" prop="dbUsername">
-                     <el-input v-model="form.dbUsername" placeholder="请输入连接用户名" maxlength="30" />
+                  <el-form-item label="图标" prop="icon">
+                     <el-input v-model="form.icon" placeholder="请输入图标icon" maxlength="128" />
                   </el-form-item>
                </el-col>
                <el-col :span="24">
-                  <el-form-item label="密码" prop="dbPasswd">
-                     <el-input v-model="form.dbPasswd" placeholder="请输入应用密码" type="password" maxlength="30" show-password />
-                  </el-form-item>
-               </el-col>
-            </el-row>
-
-            <el-row>
-               <el-col :span="24">
-                  <el-form-item label="备注" prop="dbDesc">
-                     <el-input v-model="form.dbDesc" placeholder="请输入应用备注"></el-input>
+                  <el-form-item label="是否限流" prop="isRateLimited">
+                     <el-input v-model="form.isRateLimited" placeholder="请输入类型" maxlength="50" />
                   </el-form-item>
                </el-col>
             </el-row>
@@ -123,21 +126,21 @@
    </div>
 </template>
 
-<script setup name="Application">
+<script setup name="Type">
 
 import {
-   listApplication,
-   delApplication,
-   getApplication,
-   updateApplication,
-   addApplication
-} from "@/api/base/smart/application";
+   listType,
+   delType,
+   getType,
+   updateType,
+   addType
+} from "@/api/smart/nlp/type";
 
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 
 // 定义变量
-const ApplicationList = ref([]);
+const TypeList = ref([]);
 const open = ref(false);
 const loading = ref(true);
 const showSearch = ref(true);
@@ -166,16 +169,16 @@ const data = reactive({
    queryParams: {
       pageNum: 1,
       pageSize: 10,
-      dbName: undefined,
-      dbDesc: undefined
+      typeName: undefined,
+      isOpen: undefined
    },
    rules: {
-      dbName: [{ required: true, message: "名称不能为空", trigger: "blur" }] , 
+      typeName: [{ required: true, message: "名称不能为空", trigger: "blur" }] ,
       jdbcUrl: [{ required: true, message: "连接不能为空", trigger: "blur" }],
-      dbType: [{ required: true, message: "类型不能为空", trigger: "blur" }] , 
+      isRateLimited: [{ required: true, message: "类型不能为空", trigger: "blur" }] ,
       dbUsername: [{ required: true , message: "用户名不能为空", trigger: "blur"}],
-      dbPasswd: [{ required: true, message: "密码不能为空", trigger: "blur" }] , 
-      dbDesc: [{ required: true, message: "备注不能为空", trigger: "blur" }] 
+      dbPasswd: [{ required: true, message: "密码不能为空", trigger: "blur" }] ,
+      isOpen: [{ required: true, message: "备注不能为空", trigger: "blur" }]
    }
 });
 
@@ -184,9 +187,9 @@ const { queryParams, form, rules } = toRefs(data);
 /** 查询应用列表 */
 function getList() {
    loading.value = true;
-   listApplication(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
+   listType(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
       loading.value = false;
-      ApplicationList.value = res.rows;
+      TypeList.value = res.rows;
       total.value = res.total;
    });
 };
@@ -207,9 +210,9 @@ function resetQuery() {
 };
 /** 删除按钮操作 */
 function handleDelete(row) {
-   const ApplicationIds = row.id || ids.value;
-   proxy.$modal.confirm('是否确认删除应用编号为"' + ApplicationIds + '"的数据项？').then(function () {
-      return delApplication(ApplicationIds);
+   const TypeIds = row.id || ids.value;
+   proxy.$modal.confirm('是否确认删除应用编号为"' + TypeIds + '"的数据项？').then(function () {
+      return delType(TypeIds);
    }).then(() => {
       getList();
       proxy.$modal.msgSuccess("删除成功");
@@ -228,8 +231,8 @@ function reset() {
    form.value = {
       id: undefined,
       deptId: undefined,
-      ApplicationName: undefined,
-      nickName: undefined,
+      TypeName: undefined,
+      requestCount: undefined,
       password: undefined,
       phonenumber: undefined,
       status: "0",
@@ -253,8 +256,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
    reset();
-   const ApplicationId = row.id || ids.value;
-   getApplication(ApplicationId).then(response => {
+   const id = row.id || ids.value;
+   getType(id).then(response => {
       form.value = response.data;
       open.value = true;
       title.value = "修改应用";
@@ -265,14 +268,14 @@ function handleUpdate(row) {
 function submitForm() {
    proxy.$refs["databaseRef"].validate(valid => {
       if (valid) {
-         if (form.value.ApplicationId != undefined) {
-            updateApplication(form.value).then(response => {
+         if (form.value.id != undefined) {
+            updateType(form.value).then(response => {
                proxy.$modal.msgSuccess("修改成功");
                open.value = false;
                getList();
             });
          } else {
-            addApplication(form.value).then(response => {
+            addType(form.value).then(response => {
                proxy.$modal.msgSuccess("新增成功");
                open.value = false;
                getList();

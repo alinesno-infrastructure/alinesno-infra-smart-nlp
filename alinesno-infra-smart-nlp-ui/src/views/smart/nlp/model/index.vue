@@ -31,18 +31,18 @@
                <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
             </el-row>
 
-            <el-table v-loading="loading" :data="ApplicationList" @selection-change="handleSelectionChange">
+            <el-table v-loading="loading" :data="ModelList" @selection-change="handleSelectionChange">
                <el-table-column type="selection" width="50" align="center" />
                <el-table-column label="图标" align="center" with="80" key="status" v-if="columns[5].visible">
                </el-table-column>
 
                <!-- 业务字段-->
-               <el-table-column label="应用名称" align="center" key="applicationName" prop="applicationName" v-if="columns[0].visible" />
-               <el-table-column label="应用描述" align="center" key="intro" prop="intro" v-if="columns[1].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="授权地址" align="center" key="allow_url" prop="allowUrl" v-if="columns[2].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="应用名称" align="center" key="dbName" prop="dbName" v-if="columns[0].visible" />
+               <el-table-column label="应用描述" align="center" key="dbDesc" prop="dbDesc" v-if="columns[1].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="表数据量" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
                <el-table-column label="类型" align="center" key="dbType" prop="dbType" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="是否公开" align="center" key="isPublic" prop="isPublic" v-if="columns[4].visible" width="120" />
-               <el-table-column label="状态" align="center" key="status" v-if="columns[5].visible" />
+               <el-table-column label="应用地址" align="center" key="jdbcUrl" prop="jdbcUrl" v-if="columns[4].visible" width="120" />
+               <el-table-column label="状态" align="center" key="hasStatus" v-if="columns[5].visible" />
 
                <el-table-column label="添加时间" align="center" prop="addTime" v-if="columns[6].visible" width="160">
                   <template #default="scope">
@@ -53,13 +53,13 @@
                <!-- 操作字段  -->
                <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
                   <template #default="scope">
-                     <el-tooltip content="修改" placement="top" v-if="scope.row.ApplicationId !== 1">
+                     <el-tooltip content="修改" placement="top" v-if="scope.row.ModelId !== 1">
                         <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
-                           v-hasPermi="['system:Application:edit']"></el-button>
+                           v-hasPermi="['system:Model:edit']"></el-button>
                      </el-tooltip>
-                     <el-tooltip content="删除" placement="top" v-if="scope.row.ApplicationId !== 1">
+                     <el-tooltip content="删除" placement="top" v-if="scope.row.ModelId !== 1">
                         <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-                           v-hasPermi="['system:Application:remove']"></el-button>
+                           v-hasPermi="['system:Model:remove']"></el-button>
                      </el-tooltip>
                   </template>
 
@@ -74,96 +74,40 @@
          <el-form :model="form" :rules="rules" ref="databaseRef" label-width="100px">
             <el-row>
                <el-col :span="24">
-                  <el-form-item label="应用图标" prop="logo">
-                     <!-- <el-input v-model="form.logo" placeholder="请输入应用图标" maxlength="255" /> -->
-
-                     <el-upload action="#" list-type="picture-card" :auto-upload="false">
-                           <el-icon><Plus /></el-icon>
-
-                           <template #file="{ file }">
-                              <div>
-                              <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
-                              <span class="el-upload-list__item-actions">
-                                 <span
-                                    class="el-upload-list__item-preview"
-                                    @click="handlePictureCardPreview(file)"
-                                 >
-                                    <el-icon><zoom-in /></el-icon>
-                                 </span>
-                                 <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    @click="handleDownload(file)"
-                                 >
-                                    <el-icon><Download /></el-icon>
-                                 </span>
-                                 <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    @click="handleRemove(file)"
-                                 >
-                                    <el-icon><Delete /></el-icon>
-                                 </span>
-                              </span>
-                              </div>
-                           </template>
-                        </el-upload>
-
-                  </el-form-item>
-               </el-col>
-               <el-col :span="24">
-                  <el-form-item label="应用名称" prop="applicationName">
-                     <el-input v-model="form.applicationName" placeholder="请输入应用名称" maxlength="50" />
+                  <el-form-item label="名称" prop="dbName">
+                     <el-input v-model="form.dbName" placeholder="请输入应用名称" maxlength="50" />
                   </el-form-item>
                </el-col>
             </el-row>
             <el-row>
                <el-col :span="24">
-                  <el-form-item label="应用介绍" prop="intro">
-                     <el-input v-model="form.intro" type="textarea" placeholder="请输入应用介绍" maxlength="255" />
+                  <el-form-item label="连接" prop="jdbcUrl">
+                     <el-input v-model="form.jdbcUrl" placeholder="请输入jdbcUrl连接地址" maxlength="128" />
+                  </el-form-item>
+               </el-col>
+               <el-col :span="24">
+                  <el-form-item label="类型" prop="dbType">
+                     <el-input v-model="form.dbType" placeholder="请输入类型" maxlength="50" />
                   </el-form-item>
                </el-col>
             </el-row>
             <el-row>
                <el-col :span="24">
-                  <el-form-item label="授权地址" prop="allowUrl">
-                     <el-input v-model="form.allowUrl" placeholder="请输入授权地址" maxlength="255" />
+                  <el-form-item label="用户名" prop="dbUsername">
+                     <el-input v-model="form.dbUsername" placeholder="请输入连接用户名" maxlength="30" />
                   </el-form-item>
                </el-col>
-
                <el-col :span="24">
-                  <el-form-item label="应用状态" prop="status">
-                     <el-radio-group v-model="form.status">
-                        <el-radio
-                           v-for="dict in sys_normal_disable"
-                           :key="dict.value"
-                           :label="dict.value"
-                        >{{ dict.label }}</el-radio>
-                     </el-radio-group>
-                  </el-form-item>
-               </el-col>
-
-               <el-col :span="24">
-                  <!-- <el-form-item label="是否公开" prop="isPublic">
-                     <el-input v-model="form.isPublic" placeholder="请输入是否公开" maxlength="1" />
-                  </el-form-item> -->
-
-                  <el-form-item label="是否公开" prop="isPublic">
-                     <el-radio-group v-model="form.isPublic">
-                        <el-radio
-                           v-for="dict in sys_normal_disable"
-                           :key="dict.value"
-                           :label="dict.value"
-                        >{{ dict.label }}</el-radio>
-                     </el-radio-group>
+                  <el-form-item label="密码" prop="dbPasswd">
+                     <el-input v-model="form.dbPasswd" placeholder="请输入应用密码" type="password" maxlength="30" show-password />
                   </el-form-item>
                </el-col>
             </el-row>
 
             <el-row>
                <el-col :span="24">
-                  <el-form-item label="备注" prop="description">
-                     <el-input v-model="form.description"  placeholder="请输入应用备注"></el-input>
+                  <el-form-item label="备注" prop="dbDesc">
+                     <el-input v-model="form.dbDesc" placeholder="请输入应用备注"></el-input>
                   </el-form-item>
                </el-col>
             </el-row>
@@ -179,22 +123,21 @@
    </div>
 </template>
 
-<script setup name="Application">
+<script setup name="Model">
 
 import {
-   listApplication,
-   delApplication,
-   getApplication,
-   updateApplication,
-   addApplication
-} from "@/api/base/smart/application";
+   listModel,
+   delModel,
+   getModel,
+   updateModel,
+   addModel
+} from "@/api/smart/nlp/model";
 
 const router = useRouter();
 const { proxy } = getCurrentInstance();
-const { sys_normal_disable, sys_user_sex } = proxy.useDict("sys_normal_disable", "sys_user_sex");
 
 // 定义变量
-const ApplicationList = ref([]);
+const ModelList = ref([]);
 const open = ref(false);
 const loading = ref(true);
 const showSearch = ref(true);
@@ -211,11 +154,11 @@ const roleOptions = ref([]);
 const columns = ref([
    { key: 0, label: `应用名称`, visible: true },
    { key: 1, label: `应用描述`, visible: true },
-   { key: 2, label: `授权地址`, visible: true },
+   { key: 2, label: `表数据量`, visible: true },
    { key: 3, label: `类型`, visible: true },
-   { key: 4, label: `是否公开`, visible: true },
+   { key: 4, label: `应用地址`, visible: true },
    { key: 5, label: `状态`, visible: true },
-   { key: 6, label: `添加时间`, visible: true }
+   { key: 6, label: `更新时间`, visible: true }
 ]);
 
 const data = reactive({
@@ -241,9 +184,9 @@ const { queryParams, form, rules } = toRefs(data);
 /** 查询应用列表 */
 function getList() {
    loading.value = true;
-   listApplication(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
+   listModel(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
       loading.value = false;
-      ApplicationList.value = res.rows;
+      ModelList.value = res.rows;
       total.value = res.total;
    });
 };
@@ -264,9 +207,9 @@ function resetQuery() {
 };
 /** 删除按钮操作 */
 function handleDelete(row) {
-   const ApplicationIds = row.id || ids.value;
-   proxy.$modal.confirm('是否确认删除应用编号为"' + ApplicationIds + '"的数据项？').then(function () {
-      return delApplication(ApplicationIds);
+   const ModelIds = row.id || ids.value;
+   proxy.$modal.confirm('是否确认删除应用编号为"' + ModelIds + '"的数据项？').then(function () {
+      return delModel(ModelIds);
    }).then(() => {
       getList();
       proxy.$modal.msgSuccess("删除成功");
@@ -285,7 +228,7 @@ function reset() {
    form.value = {
       id: undefined,
       deptId: undefined,
-      ApplicationName: undefined,
+      ModelName: undefined,
       nickName: undefined,
       password: undefined,
       phonenumber: undefined,
@@ -310,8 +253,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
    reset();
-   const ApplicationId = row.id || ids.value;
-   getApplication(ApplicationId).then(response => {
+   const ModelId = row.id || ids.value;
+   getModel(ModelId).then(response => {
       form.value = response.data;
       open.value = true;
       title.value = "修改应用";
@@ -322,14 +265,14 @@ function handleUpdate(row) {
 function submitForm() {
    proxy.$refs["databaseRef"].validate(valid => {
       if (valid) {
-         if (form.value.ApplicationId != undefined) {
-            updateApplication(form.value).then(response => {
+         if (form.value.ModelId != undefined) {
+            updateModel(form.value).then(response => {
                proxy.$modal.msgSuccess("修改成功");
                open.value = false;
                getList();
             });
          } else {
-            addApplication(form.value).then(response => {
+            addModel(form.value).then(response => {
                proxy.$modal.msgSuccess("新增成功");
                open.value = false;
                getList();

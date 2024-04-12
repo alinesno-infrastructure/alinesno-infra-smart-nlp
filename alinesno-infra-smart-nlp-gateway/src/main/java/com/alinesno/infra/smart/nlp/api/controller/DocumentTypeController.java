@@ -4,8 +4,8 @@ import com.alinesno.infra.common.core.constants.SpringInstanceScope;
 import com.alinesno.infra.common.facade.pageable.DatatablesPageBean;
 import com.alinesno.infra.common.facade.pageable.TableDataInfo;
 import com.alinesno.infra.common.web.adapter.rest.BaseController;
-import com.alinesno.infra.smart.nlp.entity.ApplicationEntity;
-import com.alinesno.infra.smart.nlp.service.IApplicationService;
+import com.alinesno.infra.smart.nlp.entity.DocumentTypeEntity;
+import com.alinesno.infra.smart.nlp.service.IDocumentTypeService;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -19,24 +19,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 处理与ApplicationEntity相关的请求的Controller。
- * 继承自BaseController类并实现IApplicationService接口。
+ * 处理与DocumentTypeEntity相关的请求的Controller。
+ * 继承自BaseController类并实现IDocumentTypeService接口。
  *
  * @author LuoXiaoDong
  * @version 1.0.0
  */
 @Slf4j
-@Api(tags = "Application")
+@Api(tags = "DocumentType")
 @RestController
 @Scope(SpringInstanceScope.PROTOTYPE)
-@RequestMapping("/api/infra/smart/nlp/application")
-public class ApplicationController extends BaseController<ApplicationEntity, IApplicationService> {
+@RequestMapping("/api/infra/smart/nlp/document_type")
+public class DocumentTypeController extends BaseController<DocumentTypeEntity, IDocumentTypeService> {
 
     @Autowired
-    private IApplicationService service;
+    private IDocumentTypeService service;
 
     /**
-     * 获取ApplicationEntity的DataTables数据。
+     * 获取DocumentTypeEntity的DataTables数据。
      *
      * @param request HttpServletRequest对象。
      * @param model   Model对象。
@@ -51,7 +51,7 @@ public class ApplicationController extends BaseController<ApplicationEntity, IAp
     }
 
     @Override
-    public IApplicationService getFeign() {
+    public IDocumentTypeService getFeign() {
         return this.service;
     }
 }

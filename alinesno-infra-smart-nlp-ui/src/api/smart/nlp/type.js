@@ -3,13 +3,13 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 
 /**
  * 数据库接口操作
- * 
+ *
  * @author luoxiaodong
  * @since 1.0.0
  */
 
 // 接口配置项
-var prefix = '/api/infra/base/nlp/application/' ;
+var prefix = '/api/infra/smart/nlp/document_type/' ;
 var managerUrl = {
     datatables : prefix +"datatables" ,
     createUrl: prefix + 'add' ,
@@ -25,7 +25,7 @@ var managerUrl = {
 }
 
 // 查询数据库列表
-export function listApplication(query) {
+export function listType(query) {
   return request({
     url: managerUrl.datatables ,
     method: 'post',
@@ -34,7 +34,7 @@ export function listApplication(query) {
 }
 
 // 查询数据库详细
-export function getApplication(databaseId) {
+export function getType(databaseId) {
   return request({
     url: managerUrl.detailUrl + '/' + parseStrEmpty(databaseId),
     method: 'get'
@@ -42,7 +42,7 @@ export function getApplication(databaseId) {
 }
 
 // 新增数据库
-export function addApplication(data) {
+export function addType(data) {
   return request({
     url: managerUrl.saveUrl ,
     method: 'post',
@@ -51,7 +51,7 @@ export function addApplication(data) {
 }
 
 // 修改数据库
-export function updateApplication(data) {
+export function updateType(data) {
   return request({
     url: managerUrl.updateUrl ,
     method: 'put',
@@ -60,7 +60,7 @@ export function updateApplication(data) {
 }
 
 // 删除数据库
-export function delApplication(databaseId) {
+export function delType(databaseId) {
   return request({
     url: managerUrl.removeUrl + '/' + parseStrEmpty(databaseId),
     method: 'delete'

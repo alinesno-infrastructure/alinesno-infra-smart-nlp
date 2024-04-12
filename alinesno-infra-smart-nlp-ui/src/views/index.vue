@@ -25,8 +25,9 @@
       </el-col>
     </el-row>
 
-    <!-- 应用统计 -->
+    <!-- 应用统计
     <OperationWorkspaceCountStaitcs />
+    -->
 
     <!-- 应用套件和状态 -->
     <OperationWorkspaceService />

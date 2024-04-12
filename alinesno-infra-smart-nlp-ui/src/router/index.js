@@ -92,31 +92,36 @@ export const constantRoutes = [
 
       // >>>>>>>>>>>>>> smart_router_start >>>>>>>>>>>>>>>>>>>>>
       {
-        path: '/base/smart/application/index',
-        component: () => import('@/views/base/smart/application/index'),
-        name: '/base/smart/application/index',
+        path: '/smart/nlp/application/index',
+        component: () => import('@/views/smart/nlp/application/index'),
+        name: '/smart/nlp/application/index',
         meta: { title: '应用管理', icon: 'dashboard', affix: true }
       }, 
       {
-        path: '/base/smart/model/index',
-        component: () => import('@/views/base/smart/model/index'),
-        name: '/base/smart/model/index',
+        path: '/smart/nlp/type/index',
+        component: () => import('@/views/smart/nlp/type/index'),
+        name: '/smart/nlp/type/index',
+        meta: { title: '类型管理', icon: 'dashboard', affix: true }
+      },
+      {
+        path: '/smart/nlp/model/index',
+        component: () => import('@/views/smart/nlp/model/index'),
+        name: '/smart/nlp/model/index',
         meta: { title: '模型管理', icon: 'dashboard', affix: true }
       }, 
       {
-        path: '/base/smart/config/index',
-        component: () => import('@/views/base/smart/config/index'),
-        name: '/base/smart/config/index',
+        path: '/smart/nlp/config/index',
+        component: () => import('@/views/smart/nlp/config/index'),
+        name: '/smart/nlp/config/index',
         meta: { title: '认证配置', icon: 'dashboard', affix: true }
       }, 
       {
-        path: '/base/smart/apiRecord/index',
-        component: () => import('@/views/base/smart/apiRecord/index'),
-        name: '/base/smart/apiRecord/index',
+        path: '/smart/nlp/apiRecord/index',
+        component: () => import('@/views/smart/nlp/apiRecord/index'),
+        name: '/smart/nlp/apiRecord/index',
         meta: { title: '日志记录', icon: 'dashboard', affix: true }
       }
       // >>>>>>>>>>>>>> smart_router_end   >>>>>>>>>>>>>>>>>>>>>
-      
     ]
   },
   {
