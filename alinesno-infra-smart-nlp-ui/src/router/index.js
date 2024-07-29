@@ -92,6 +92,24 @@ export const constantRoutes = [
 
       // >>>>>>>>>>>>>> smart_router_start >>>>>>>>>>>>>>>>>>>>>
       {
+        path: '/smart/ocr/project/list',
+        component: () => import('@/views/smart/nlp/project/list'),
+        name: '/smart/ocr/project/list',
+        meta: { title: '项目管理', icon: 'dashboard', affix: true }
+      },
+      {
+        path: '/smart/ocr/monitormanage/list',
+        component: () => import('@/views/smart/nlp/monitormanage/list'),
+        name: '/smart/ocr/monitormanage/list',
+        meta: { title: '监控管理', icon: 'dashboard', affix: true }
+      },
+      {
+        path: '/smart/ocr/openservice/list',
+        component: () => import('@/views/smart/nlp/openservice/list'),
+        name: '/smart/ocr/openservice/list',
+        meta: { title: '开通服务', icon: 'dashboard', affix: true }
+      },
+      /*{
         path: '/smart/nlp/application/index',
         component: () => import('@/views/smart/nlp/application/index'),
         name: '/smart/nlp/application/index',
@@ -120,7 +138,7 @@ export const constantRoutes = [
         component: () => import('@/views/smart/nlp/apiRecord/index'),
         name: '/smart/nlp/apiRecord/index',
         meta: { title: '日志记录', icon: 'dashboard', affix: true }
-      }
+      }*/
       // >>>>>>>>>>>>>> smart_router_end   >>>>>>>>>>>>>>>>>>>>>
     ]
   },

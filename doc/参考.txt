@@ -1,0 +1,31 @@
+@知知 你先参其它项目完善NLP和OCR服务，都增加以下功能：
+项目管理：参考 http://alinesno-infra-base-fileshow-ui.beta.base.infra.linesno.com/base/fileshow/project/index
+监控管理：参考 http://alinesno-infra-base-fileshow-ui.beta.base.infra.linesno.com/base/fileshow/analyse/index
+开通服务：参考 http://alinesno-infra-base-fileshow-ui.beta.base.infra.linesno.com/base/fileshow/type/index
+OpenService
+
+先集成和完善这三个功能，在OCR和NLP模块上面
+
+参考项目的代码：https://codeup.aliyun.com/alinesno-cloud/alinesno-infrastructure/alinesno-infra-base-fileshow
+
+
+mvn install:install-file
+
+-Dfile=jar包的绝对位置
+
+-DgroupId=pom文件依赖的groupId
+
+-DartifactId=pom文件依赖的artifactId
+
+-Dversion=pom文件依赖的version
+
+-Dpackaging=jar
+
+
+ mvn install:install-file -Dfile=F:\mavenproject\task6\jnshu\lib\Sdk4J.jar -DgroupId=com.mycom.myapp -DartifactId=sdk4j -Dversion=1.0 -Dpackaging=jar
+
+--
+mvn install:install-file -Dfile=D:\Download\jai_codec-1.1.3.jar -DgroupId=javax.media -DartifactId=jai_codec -Dversion=1.1.3 -Dpackaging=jar
+
+
+mvn install:install-file -Dfile=D:\Download\jai_core-1.1.3.pom -DgroupId=javax.media -DartifactId=jai_core -Dversion=1.1.3 -Dpackaging=pom
