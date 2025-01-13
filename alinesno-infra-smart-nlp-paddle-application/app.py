@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import os
-import cv2
 import time
-import yaml
-import uuid
-import json
-import requests
 
-from paddlenlp.transformers import AutoTokenizer, AutoModelForCausalLM
 from datetime import timedelta
-from flask import Flask, render_template, request, jsonify
-from werkzeug.utils import secure_filename
-from werkzeug import run_simple
+from flask import Flask, request, jsonify
 from paddlenlp import Taskflow
 
 app = Flask(__name__)
