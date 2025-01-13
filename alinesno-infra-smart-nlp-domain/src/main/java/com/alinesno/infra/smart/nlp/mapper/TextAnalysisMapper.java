@@ -1,7 +1,7 @@
 package com.alinesno.infra.smart.nlp.mapper;
 
-import com.alinesno.infra.smart.nlp.entity.TextAnalysisEntity;
 import com.alinesno.infra.common.facade.mapper.repository.IBaseMapper;
+import com.alinesno.infra.smart.nlp.entity.TextAnalysisEntity;
 
 /**
  * <p>
