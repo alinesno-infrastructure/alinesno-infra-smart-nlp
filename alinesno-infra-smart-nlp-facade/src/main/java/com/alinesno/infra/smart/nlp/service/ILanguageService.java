@@ -1,7 +1,7 @@
 package com.alinesno.infra.smart.nlp.service;
 
-import com.alinesno.infra.smart.nlp.entity.LanguageEntity;
 import com.alinesno.infra.common.facade.services.IBaseService;
+import com.alinesno.infra.smart.nlp.entity.LanguageEntity;
 
 /**
  * <p>
