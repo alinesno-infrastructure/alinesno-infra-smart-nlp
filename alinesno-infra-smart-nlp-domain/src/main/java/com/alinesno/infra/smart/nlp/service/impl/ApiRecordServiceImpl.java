@@ -1,6 +1,7 @@
 package com.alinesno.infra.smart.nlp.service.impl;
 
 import cn.hutool.core.util.ArrayUtil;
+import com.alinesno.infra.common.core.service.impl.IBaseServiceImpl;
 import com.alinesno.infra.common.core.utils.StringUtils;
 import com.alinesno.infra.common.core.utils.ip.AddressUtils;
 import com.alinesno.infra.common.web.log.bo.SysOperLogBo;
@@ -15,8 +16,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import com.alinesno.infra.common.core.service.impl.IBaseServiceImpl;
 
 import java.util.Arrays;
 import java.util.Date;
