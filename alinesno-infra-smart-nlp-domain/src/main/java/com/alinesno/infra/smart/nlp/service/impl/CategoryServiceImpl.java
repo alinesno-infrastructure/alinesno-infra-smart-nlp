@@ -1,13 +1,12 @@
 package com.alinesno.infra.smart.nlp.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
+import com.alinesno.infra.common.core.service.impl.IBaseServiceImpl;
 import com.alinesno.infra.smart.nlp.entity.CategoryEntity;
 import com.alinesno.infra.smart.nlp.mapper.CategoryMapper;
 import com.alinesno.infra.smart.nlp.service.ICategoryService;
-import com.alinesno.infra.common.core.service.impl.IBaseServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * <p>
