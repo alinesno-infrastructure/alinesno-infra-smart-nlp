@@ -10,15 +10,17 @@
           <div class="icon">
             <div class="title">
                  {{ currentEnvClusterObj.appName}}
+              <!-- 
               <div class="cluster-info">
                 <span>
                   <i class="el-icon-monitor"></i>
                   {{ currentEnvClusterObj.clusterName }}
                   </span>
-              </div>
+              </div> 
+              -->
             </div>
             <div class="title-desc">
-              集群状态展示集群资源的概览和详情，您可以查看集群资源的监控数据和用量排行情况。
+                  {{ currentEnvClusterObj.clusterName }}
             </div>
           </div>
         </div>
@@ -46,7 +48,7 @@ import OperationWorkspaceService from './operation-workspace/service.vue'
 
 const currentEnvClusterObj = ref({
   appName: '自然语言识别服务',
-  clusterName: '基于多个主流(GPT/星火/文心一言等)大模型的服务调用和管理'  , 
+  clusterName: '自然语言处理（NLP）是为各类企业及开发者提供的用于文本分析及挖掘的核心工具'  , 
   apiServerUrl: 'http://portal.infra.linesno.com'
 }) 
 
