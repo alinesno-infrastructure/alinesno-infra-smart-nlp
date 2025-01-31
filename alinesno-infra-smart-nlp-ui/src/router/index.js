@@ -92,21 +92,21 @@ export const constantRoutes = [
 
       // >>>>>>>>>>>>>> smart_router_start >>>>>>>>>>>>>>>>>>>>>
       {
-        path: '/smart/ocr/project/list',
+        path: '/smart/nlp/project/list',
         component: () => import('@/views/smart/nlp/project/list'),
-        name: '/smart/ocr/project/list',
+        name: '/smart/nlp/project/list',
         meta: { title: '项目管理', icon: 'dashboard', affix: true }
       },
       {
-        path: '/smart/ocr/monitormanage/list',
+        path: '/smart/nlp/monitormanage/list',
         component: () => import('@/views/smart/nlp/monitormanage/list'),
-        name: '/smart/ocr/monitormanage/list',
+        name: '/smart/nlp/monitormanage/list',
         meta: { title: '监控管理', icon: 'dashboard', affix: true }
       },
       {
-        path: '/smart/ocr/openservice/list',
+        path: '/smart/nlp/openservice/list',
         component: () => import('@/views/smart/nlp/openservice/list'),
-        name: '/smart/ocr/openservice/list',
+        name: '/smart/nlp/openservice/list',
         meta: { title: '开通服务', icon: 'dashboard', affix: true }
       },
       /*{
@@ -132,13 +132,19 @@ export const constantRoutes = [
         component: () => import('@/views/smart/nlp/config/index'),
         name: '/smart/nlp/config/index',
         meta: { title: '认证配置', icon: 'dashboard', affix: true }
-      }, 
+      }, */
+      {
+          path: '/smart/nlp/analyse/index',
+          component: () => import('@/views/smart/nlp/analyse/index'),
+          name: '/smart/nlp/analyse/index',
+          meta: {title: '监控管理', icon: 'dashboard', affix: true}
+      },
       {
         path: '/smart/nlp/apiRecord/index',
         component: () => import('@/views/smart/nlp/apiRecord/index'),
         name: '/smart/nlp/apiRecord/index',
         meta: { title: '日志记录', icon: 'dashboard', affix: true }
-      }*/
+      }
       // >>>>>>>>>>>>>> smart_router_end   >>>>>>>>>>>>>>>>>>>>>
     ]
   },
