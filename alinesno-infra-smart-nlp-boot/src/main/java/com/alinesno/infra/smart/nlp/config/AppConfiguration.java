@@ -1,5 +1,6 @@
 package com.alinesno.infra.smart.nlp.config;
 
+import com.alinesno.infra.common.extend.datasource.enable.EnableInfraDataScope;
 import com.alinesno.infra.common.facade.enable.EnableActable;
 import com.alinesno.infra.common.web.adapter.sso.enable.EnableInfraSsoApi;
 import com.alinesno.infra.common.web.log.aspect.LogAspect;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * 配置类
  */
 @Slf4j
+@EnableInfraDataScope
 @EnableActable
 @EnableInfraSsoApi
 @MapperScan("com.alinesno.infra.smart.nlp.mapper")
