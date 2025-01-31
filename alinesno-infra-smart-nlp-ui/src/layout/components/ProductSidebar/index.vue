@@ -22,9 +22,12 @@ const router = useRouter();
 
 // 菜单列表
 const menuItems = ref([
-  {id:'1' , icon:'fa-brands fa-slack' , link:'/smart/ocr/project/list' , desc:'项目管理'},
-  {id:'2' , icon:'fa-solid fa-at' , link:'/smart/ocr/monitormanage/list' , desc:'监控管理'},
-  {id:'3' , icon:'fa-solid fa-file-pdf' , link:'/smart/ocr/openservice/list' , desc:'开通服务'}
+  {id:'3' , icon:'fa-brands fa-slack' , link:'/smart/nlp/project/list' , desc:'项目管理'},
+  {id:'4' , icon:'fa-solid fa-at' , link:'/smart/nlp/monitormanage/list' , desc:'监控管理'},
+  {id:'5' , icon:'fa-solid fa-file-pdf' , link:'/smart/nlp/openservice/list' , desc:'开通服务'},
+  {id:'8' , icon:'fa-brands fa-wordpress' , link:'/smart/nlp/openservice/list' , desc:'识别结果'},
+  {id:'6' , icon:'fa-solid fa-computer' , link:'/smart/nlp/analyse/index' , desc:'调用分析'},
+  {id:'7' , icon:'fa-solid fa-code-pull-request' , link:'/smart/nlp/apiRecord/index' , desc:'操作记录'},
 ]);
 
 // 打开服务市场
@@ -38,9 +41,9 @@ function jumpTo() {
 }
 
 // 打开智能客服
-function openSmartService() {
-  router.push({ path: "/dashboard/smartService" });
-}
+// function openSmartService() {
+//   router.push({ path: "/dashboard/smartService" });
+// }
 
 </script>
 
