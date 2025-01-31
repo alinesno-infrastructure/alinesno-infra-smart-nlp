@@ -62,7 +62,6 @@ updateOpenService
 
 // 查询数据库列表
 export function listProject(query) {
-    debugger
   return request({
     url: managerUrl.datatables ,
     method: 'post',
