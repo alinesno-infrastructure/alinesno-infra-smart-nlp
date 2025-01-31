@@ -6,49 +6,24 @@
 
         <div class="grid-content">
           <div class="panel-header">
-            <div class="header-title"><i class="fa-solid fa-user-nurse"></i> 接口调用状态</div>
+            <div class="header-title"><i class="fa-solid fa-user-nurse"></i> 服务类别</div>
           </div>
-          <div class="panel-body acp-height-auto">
-        <div class="box-header">
-          <el-row>
-            <el-col :span="4">
-              <div class="item-box">
-                <ul>
-                  <li
-                    class="item-box-info"
-                    :class="index === 0 ? 'active' : ''"
-                    v-for="(item, index) in resources"
-                    :key="index"
-                  >
-                    <div class="item-status">
-                      <div
-                        class="server-desc"
-                        style="margin-top: 10px; margin-left: 10px"
-                      >
-                        <i :class="item.icon"></i>
-                      </div>
+          <div class="panel-body acp-height-auto" style="padding-left: 5px;padding-right: 5px;">
+            <div class="box-header">
+              <el-row>
+                <el-col :span="24" style="column-count: 2;">
+
+                  <div v-for="(item, index) in services" :key="index" class="item-box">
+                    <img :src="item.imgSrc" :alt="item.altText">
+                    <div class="content">
+                      <div class="item-title">{{ item.title }}</div>
+                      <div class="item-desc">{{ item.desc }}</div>
                     </div>
-                    <div class="status-info">
-                      <div class="item-text">{{ item.title }}</div>
-                      <div class="item-num">
-                        {{ item.usage }}
-                        <span class="total-num">{{ item.total }}</span>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </el-col>
-            <el-col :span="20">
-              <div class="sidecard-bar">
-                <div
-                  id="echarts-bar2-chart"
-                  :style="{ width: '100%', height: '250px' }"
-                ></div>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
+                  </div>
+
+                </el-col>
+              </el-row>
+            </div>
           </div>
         </div>
 
@@ -61,7 +36,8 @@
           </div>
           <div class="panel-body acp-height-auto">
             <ul class="panel-item-text">
-              <li style="width:calc(50% - 20px);margin:10px;padding:10px;" v-for="item in sensitiveWords" :key="item.id">
+              <li style="width:calc(50% - 20px);margin:10px;padding:10px;" v-for="item in sensitiveWords"
+                :key="item.id">
                 <div class="item-health-box">
                   <div class="item-health-title">{{ item.title }}</div>
                   <div class="item-health-count">{{ item.count }}</div>
@@ -78,265 +54,94 @@
 
 <script setup>
 
-import * as echarts from "echarts";
+// import * as echarts from "echarts";
 
 /// 声明定义一下echart
-const echart = echarts;
+// const echart = echarts;
 
 const sensitiveWords = ref([
-      { id: '1', title: '政治敏感词', count: 45 },
-      { id: '2', title: '色情敏感词', count: 145 },
-      { id: '3', title: '暴力敏感词', count: 65 },
-      { id: '5', title: '恐怖主义敏感词', count: 45 },
-      { id: '6', title: '涉暴恐敏感词', count: 45 },
-    ]);
+  { id: '1', title: '政治敏感词', count: 45 },
+  { id: '2', title: '色情敏感词', count: 145 },
+  { id: '3', title: '暴力敏感词', count: 65 },
+  { id: '5', title: '恐怖主义敏感词', count: 45 },
+  { id: '6', title: '涉暴恐敏感词', count: 45 },
+]);
 
-const resources = ref([
-        {
-          icon: "fas fa-microchip",
-          title: "请求统计",
-          total: "4",
-          usage: "0.64",
-          usagePre: "12%",
-        },
-        {
-          icon: "fas fa-memory",
-          title: "文本统计",
-          total: "7.68",
-          usage: "4.81",
-          usagePre: "12%",
-        },
-        {
-          icon: "fas fa-hdd",
-          title: "月统计",
-          total: "21.57",
-          usage: "207.71",
-          usagePre: "12%",
-        },
-        {
-          icon: "fab fa-docker",
-          title: "异常统计",
-          total: "220",
-          usage: "28",
-          usagePre: "12%",
-        },
-      ]) ;
+const services = [
+  {
+    imgSrc: "https://img.alicdn.com/imgextra/i2/O1CN01GgGQxH1aMmB6RjJTh_!!6000000003316-0-tps-550-550.jpg",
+    altText: "基础文本图片",
+    title: "基础文本",
+    desc: "提供词法、句法、篇章分析等API中的通用能力，包含分词、词性标注、命名实体识别、文本纠错等。"
+  },
+  {
+    imgSrc: "https://img.alicdn.com/imgextra/i1/O1CN01pdJXYx24mMmIHXj9L_!!6000000007433-0-tps-551-550.jpg",
+    altText: "医疗行业图片",
+    title: "医疗行业",
+    desc: "提供医疗行业所需的场景能力，针对医疗文本支持对应的分析能力，包含医学实体识别、病历查重、诊断归一等。"
+  },
+  {
+    imgSrc: "https://img.alicdn.com/imgextra/i3/O1CN01UFYmby1oAK1hvJdt2_!!6000000005184-0-tps-551-550.jpg",
+    altText: "电商行业图片",
+    title: "电商行业",
+    desc: "提供电商行业所需的多个场景能力，包含智能商品发布、商品评价解析、电商客服对话抽取等。"
+  },
+  {
+    imgSrc: "https://img.alicdn.com/imgextra/i2/O1CN01DONpDU1S5MBYYNQ0X_!!6000000002195-0-tps-551-550.jpg",
+    altText: "通用行业图片",
+    title: "通用行业",
+    desc: "提供多个行业所需的通用场景能力，包含招中标解析、简历抽取、裁判文书解析等。"
+  }
+];
 
-function drawBar2() {
-      let barChart = echart.init(
-        document.getElementById("echarts-bar2-chart")
-      );
+// const resources = ref([
+//   {
+//     icon: "fas fa-microchip",
+//     title: "请求统计",
+//     total: "4",
+//     usage: "0.64",
+//     usagePre: "12%",
+//   },
+//   {
+//     icon: "fas fa-memory",
+//     title: "文本统计",
+//     total: "7.68",
+//     usage: "4.81",
+//     usagePre: "12%",
+//   },
+//   {
+//     icon: "fas fa-hdd",
+//     title: "月统计",
+//     total: "21.57",
+//     usage: "207.71",
+//     usagePre: "12%",
+//   },
+//   {
+//     icon: "fab fa-docker",
+//     title: "异常统计",
+//     total: "220",
+//     usage: "28",
+//     usagePre: "12%",
+//   },
+// ]);
 
-      var lineOption = {
-        title: {
-          text: "请求延迟(ms)",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        legend: {
-          data: ["访问流量", "访问IP"],
-        },
-        grid: {
-          x: 40,
-          x2: 40,
-          y2: 24,
-        },
-        calculable: true,
-        xAxis: [
-          {
-            type: "category",
-            boundaryGap: false,
-            data: [
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-              "21",
-              "22",
-              "23",
-              "24",
-              "25",
-              "26",
-              "27",
-              "28",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-              "21",
-              "22",
-              "23",
-              "24",
-              "25",
-              "26",
-              "27",
-              "28",
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-              "21",
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-              "21",
-              "22",
-              "23",
-              "24",
-              "25",
-              "26",
-              "27",
-              "28",
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-              "21",
-              "22",
-              "23",
-              "24",
-              "25",
-              "26",
-              "27",
-              "28",
-              "22",
-              "23",
-              "24",
-              "25",
-              "26",
-              "27",
-              "28",
-            ],
-          },
-        ],
-        yAxis: [
-          {
-            type: "value",
-            axisLabel: {
-              formatter: "{value} K",
-            },
-          },
-        ],
-        series: [
-          {
-            name: "访问流量",
-            type: "line",
-            smooth: true,
-            data: [
-              11, 10, 12, 13, 5, 13, 8, 11, 9, 15, 8, 12, 8, 8, 11, 10, 12, 13,
-              5, 13, 8, 11, 9, 15, 8, 12, 8, 8, 11, 10, 15, 13, 5, 13, 8, 11,
-              10, 12, 13, 5, 13, 8, 11, 9, 15, 8, 12, 8, 8, 11, 10, 15, 13, 5,
-              13, 8, 11, 9, 15, 8, 12, 8, 8, 11, 10, 12, 13, 5, 13, 8, 11, 9,
-              15, 8, 12, 8, 8, 11, 10, 15, 13, 5, 13, 8, 11, 9, 15, 8, 12, 8, 8,
-              11, 9, 15, 8, 12, 8, 8, 11, 10, 12, 13, 5, 13, 8, 11, 9, 15, 8,
-              12, 8, 8, 11, 10, 15, 13, 5, 13, 8, 11, 9, 15, 8, 12, 8, 8, 11,
-              10, 15, 13, 5, 13, 8, 11, 9, 15, 8, 12, 8, 8,
-            ],
-            markPoint: {
-              data: [
-                { type: "max", name: "最大值" },
-                { type: "min", name: "最小值" },
-              ],
-            },
-            markLine: {
-              data: [{ type: "average", name: "平均值" }],
-            },
-          },
-          {
-            name: "访问IP",
-            type: "line",
-            smooth: true,
-            data: [
-              8, 2, 7, 5, 9, 10, 7, 8, 2, 7, 5, 9, 10, 7, 1, 2, 2, 5, 3, 2, 0,
-              8, 2, 7, 5, 9, 10, 7, 8, 2, 7, 5, 9, 10, 7, 1, 2, 2, 5, 3, 2, 0,
-              8, 2, 7, 5, 9, 10, 7, 1, 2, 2, 5, 3, 2, 0, 8, 2, 7, 5, 9, 10, 7,
-              8, 2, 7, 5, 9, 10, 7, 8, 2, 7, 5, 9, 10, 7, 8, 2, 7, 5, 9, 10, 7,
-              1, 2, 2, 5, 3, 2, 0, 8, 2, 7, 5, 9, 10, 7, 8, 2, 7, 5, 9, 10, 7,
-              8, 2, 7, 5, 9, 10, 7, 1, 2, 2, 5, 3, 2, 0, 8, 2, 7, 5, 9, 10, 7,
-              8, 2, 7, 5, 9, 10, 7, 8, 2, 7, 5, 9, 10, 7,
-            ],
-            markPoint: {
-              data: [{ name: "周最低", value: -2, xAxis: 1, yAxis: -1.5 }],
-            },
-            markLine: {
-              data: [{ type: "average", name: "平均值" }],
-            },
-          },
-        ],
-      };
-      barChart.setOption(lineOption);
-    } ;
 
-onMounted(() => {
-  drawBar2() ;
-});
+// onMounted(() => {
+// });
 
-onUnmounted(() => {
-  echart.dispose;
-});
+// onUnmounted(() => {
+//   echart.dispose;
+// });
 
 
 </script>
 
 <style lang="scss" scoped>
-.item-health-title{
+.item-health-title {
   margin-bottom: 5px !important;
 }
-.item-health-count{
+
+.item-health-count {
   margin-bottom: 5px;
 }
 
@@ -349,7 +154,7 @@ onUnmounted(() => {
 
     .server-desc {
       font-size: 1.6rem;
-      color: #3b5998 ;
+      color: #3b5998;
     }
 
     .active {
@@ -478,4 +283,35 @@ onUnmounted(() => {
   }
 }
 
+.item-box {
+
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  border: 1px solid #e8e8e8 ;
+  margin-bottom: 10px;
+  border-radius: 3px;
+
+  img {
+    width: 100px;
+  }
+
+  .content{
+    padding: 10px 0;
+    margin-left:10px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 8px;
+
+    .item-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .item-desc {
+      font-size: 13px;
+    }
+  }
+}
 </style>
