@@ -8,8 +8,7 @@
           </div>
           <div class="panel-body" style="height: auto;position: relative;">
               <div class="direct-box">
-                <ul style="column-count: 3;">
-                  <li class="box-item" style="width:100%" v-for="item in directContent" :key="item">
+                  <div class="box-item" v-for="item in directContent" :key="item">
                     <div class="dire-panel">
                       <div class="panel-title">
                         <i class="dire-panel-icon" :class="item.icon" :alt="item.name" />
@@ -18,8 +17,7 @@
                       <div class="panel-describe">{{ item.desc }}</div>
                       <!-- <div class="panel-tip">访问链接</div> -->
                     </div>
-                  </li>
-                </ul>
+                  </div>
               </div>
           </div>
         </div>
